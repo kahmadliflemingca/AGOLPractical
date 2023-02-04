@@ -21,14 +21,19 @@
       "esri/WebMap",
       "esri/views/MapView",
       "esri/widgets/ScaleBar",
-      "esri/widgets/Legend"
-    ], function(esriConfig, WebMap, MapView, ScaleBar, Legend) {
+      "esri/widgets/Legend" ,
+      "esri/widgets/BasemapToggle",
+      "esri/widgets/Compass",
+      "esri/widgets/DistanceMeasurement2D"
+      
+      
+    ], function(esriConfig, WebMap, MapView, ScaleBar, Legend  , BasemapToggle , Compass, DistanceMeasurement2D ) {
 
     esriConfig.apiKey = "AAPKf48975af0121408b82974ded6a03f950UKiVqLWY6Qxo39ayKG7kG2kg3wxSMx2wmrbLJhef8WRLbqW5u_4ew-LRjIax_zwX";
 
       const webmap = new WebMap({
         portalItem: {
-          id: "41281c51f9de45edaf1c8ed44bb10e30"
+          id: "b970707d849b46f9b65d63a64a29775a"
         }
       });
 
@@ -47,10 +52,32 @@
 
     const legend = new Legend ({
         view: view
+        
       });
-      view.ui.add(legend, "top-right");
+      view.ui.add(legend, "bottom-right");
 
-  });
+
+
+      const basemapToggle = new BasemapToggle({
+        view: view,
+        nextBasemap: "arcgis-imagery"
+     });
+
+      view.ui.add(basemapToggle,"top-left");
+
+      const compass = new Compass({
+  view: view
+});
+
+// adds the compass to the top left corner of the MapView
+view.ui.add(compass, "top-left");
+
+const measurementWidget = new DistanceMeasurement2D({
+  view: view
+});
+view.ui.add(measurementWidget, "top-left");
+
+    });
   </script>
 </head>
 <body>
